@@ -42,11 +42,11 @@ def search_questions(params={}):
     if params.get('pagesize', 10) and get_int(params.get('pagesize')):
         url += "&pagesize={}".format(get_int(params.get('pagesize')))
     
-    if params.get('fromdate'):
-        url += "&fromdate={}".format(params.get('fromdate'))
+    if params.get('fromdate') and get_int(params.get('fromdate')):
+        url += "&fromdate={}".format(get_int(params.get('fromdate')))
     
-    if params.get('todate'):
-        url += "&todate={}".format(params.get('todate'))
+    if params.get('todate') and get_int(params.get('todate')):
+        url += "&todate={}".format(get_int(params.get('todate')))
     
     if params.get('q'):
         url += "&q={}".format(params.get('q'))
