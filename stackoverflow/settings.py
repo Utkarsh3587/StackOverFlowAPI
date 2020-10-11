@@ -132,9 +132,7 @@ REST_FRAMEWORK = {
     ),
     'EXCEPTION_HANDLER': 'rest_framework.views.exception_handler',
     'DEFAULT_THROTTLE_RATES': {
-        # 'anon': '1/minute',
-        # 'user': '100/day',
-        'max_per_min': '1/minute',
+        'max_per_min': '50/minute',
         'max_per_day': '1000/day',
     }
 
@@ -147,9 +145,32 @@ CORS_ALLOW_CREDENTIALS = True
 CORS_ORIGIN_WHITELIST = [
     'http://localhost:4200',
 ]
+
 CORS_ORIGIN_REGEX_WHITELIST = [
     'http://localhost:4200',
 ]
+
+
+CORS_ALLOW_METHODS = [
+    'DELETE',
+    'GET',
+    'OPTIONS',
+    'PATCH',
+    'POST',
+    'PUT',
+]
+CORS_ALLOW_HEADERS = [
+    'accept',
+    'accept-encoding',
+    'authorization',
+    'content-type',
+    'dnt',
+    'origin',
+    'user-agent',
+    'x-csrftoken',
+    'x-requested-with',
+]
+
 
 CACHES = {
     "default": {

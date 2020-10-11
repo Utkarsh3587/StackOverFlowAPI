@@ -1,6 +1,8 @@
 import requests
+import time
 
-from django.core.paginator import PageNotAnInteger, EmptyPage, Paginator
+from datetime import datetime
+
 
 def get_int(value):
     try:
@@ -32,7 +34,7 @@ def get_sorting_order(value):
 def search_questions(params={}):
     url = 'https://api.stackexchange.com/2.2/search/advanced?\
         key=U4DMV*8nvpm3EOpvf69Rxw((&site=stackoverflow&order=desc&filter=default'
-    # &min=1601856000&max=1602288000
+
     if params.get('sort'):
         url += "&sort={}".format(get_sorting_order(params.get('sort')))
     
@@ -43,10 +45,24 @@ def search_questions(params={}):
         url += "&pagesize={}".format(get_int(params.get('pagesize')))
     
     if params.get('fromdate') and get_int(params.get('fromdate')):
-        url += "&fromdate={}".format(get_int(params.get('fromdate')))
+        fromdate = int(str(time.mktime(
+          datetime.datetime.strptime(params['fromdate'], "%d/%m/%Y").timetuple())).split('.')[0])
+        url += "&fromdate={}".format(get_int(fromdate))
+
+    if params.get('min') and get_int(params.get('min')):
+        minn = int(str(time.mktime(
+          datetime.datetime.strptime(params['min'], "%d/%m/%Y").timetuple())).split('.')[0])
+        url += "&min={}".format(get_int(minn))
+
+    if params.get('max') and get_int(params.get('max')):
+        maxx = int(str(time.mktime(
+          datetime.datetime.strptime(params['max'], "%d/%m/%Y").timetuple())).split('.')[0])
+        url += "&max={}".format(get_int(maxx))
     
     if params.get('todate') and get_int(params.get('todate')):
-        url += "&todate={}".format(get_int(params.get('todate')))
+        todate = int(str(time.mktime(
+          datetime.datetime.strptime(params['todate'], "%d/%m/%Y").timetuple())).split('.')[0])
+        url += "&todate={}".format(get_int(todate))
     
     if params.get('q'):
         url += "&q={}".format(params.get('q'))
@@ -70,11 +86,11 @@ def search_questions(params={}):
     if params.get('notice') and get_boolean(params.get('notice')):
         url += "&notice={}".format(params.get('notice'))
     
-    if params.get('nottagged'):
-        url += "&nottagged={}".format(params.get('nottagged'))
+    if params.get('nottagged'):  #  a semicolon delimited list of tags
+        url += "&nottagged={}".format(';'.join(params.get('nottagged')))
 
-    if params.get('tagged'):
-        url += "&tagged={}".format(params.get('tagged'))
+    if params.get('tagged'):  #  a semicolon delimited list of tags
+        url += "&tagged={}".format(';'.join(params.get('tagged')))
     
     if params.get('title'):
         url += "&title={}".format(params.get('title'))
@@ -94,24 +110,6 @@ def search_questions(params={}):
     response = requests.get(url)
     
     if response.status_code == 200:
-        return response.json()['items']
+        return response.json()
     
     return None
-
-
-def paginate_objects(responses, page, page_size, field_name='results'):
-    page = int(page)
-    paginator = Paginator(responses, int(page_size))
-    try:
-        responses = paginator.page(page)
-    except PageNotAnInteger:  # If page is not an integer, deliver first page.
-        responses = paginator.page(1)
-        page = 1
-    except EmptyPage:
-        responses = []
-    # serializer = serializer_class(responses, many=True)
-    json_object = {
-        field_name: responses, 'per_page': paginator.per_page,
-        'total': paginator.count, 'page': page
-        }
-    return json_object
