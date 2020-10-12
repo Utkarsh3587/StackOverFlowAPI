@@ -1,7 +1,11 @@
 # StackOverFlowAPI
 
+Django and Python3 Application using StackOverflow API for searching questions in StackOverflow (ref: https://api.stackexchange.com/docs/advanced-search)
 
-This is example code for integrating Stack overFlow api with Django and Django rest framework using cache and throtling.
+- Search questions using all available search parameters
+- List the results with pagination
+- Cache Stackoverflow API data
+- Apply throtlling to user requests
 
 ## How to run this app:
 
@@ -32,7 +36,7 @@ JSON BODY Request Parameters - Search Questions based on given parameters
 	"q":"python",
 	"accepted": false, 
 	"answers":1,
-	"body": "python",
+	"body": "python;",
 	"closed":false,
 	"migrated":false,
 	"notoce":false,

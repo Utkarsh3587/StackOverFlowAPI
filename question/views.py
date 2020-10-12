@@ -30,7 +30,8 @@ class QuestionListView(CreateAPIView):
             "throttleType": "Anonymous User"
         })
 
-    def post(self, request, *args, **kwargs):   
+    def post(self, request, *args, **kwargs):
+        print(request.data, request.data.values())
         
         pagesize = request.data.get('pagesize', 10)
 
