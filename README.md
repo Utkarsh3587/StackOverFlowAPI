@@ -5,27 +5,15 @@ This is example code for integrating Stack overFlow api with Django and Django r
 
 ## How to run this app:
 
-clone this repository
-`
+```
 git clone https://github.com/Utkarsh3587/StackOverFlowAPI.git
-`
-
-Create Virtual Env
-`
 python3.7 -m venv api-env
 source api-env/bin/activate
-`
-
-Move to the repo directory
-`
 cd stackoverflow
-`
-Install requirement file
-`
 pip install -r requirments.txt
 python manage.py migrate
 python manage.py runserver
-`
+```
 
 ## API
 
