@@ -49,7 +49,8 @@ class QuestionListView(CreateAPIView):
         data = cache.get(cache_key)
         context = {
           'message': 'data cached',
-          'data': []
+          'data': [],
+          'has_more': True
         }
 
         if data:

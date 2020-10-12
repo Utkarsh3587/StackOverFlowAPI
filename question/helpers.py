@@ -49,15 +49,21 @@ def search_questions(params={}):
           datetime.datetime.strptime(params['fromdate'], "%d/%m/%Y").timetuple())).split('.')[0])
         url += "&fromdate={}".format(get_int(fromdate))
 
+    # if params.get('min') and get_int(params.get('min')):
+    #     minn = int(str(time.mktime(
+    #       datetime.datetime.strptime(params['min'], "%d/%m/%Y").timetuple())).split('.')[0])
+    #     url += "&min={}".format(get_int(minn))
+
+    # if params.get('max') and get_int(params.get('max')):
+    #     maxx = int(str(time.mktime(
+    #       datetime.datetime.strptime(params['max'], "%d/%m/%Y").timetuple())).split('.')[0])
+    #     url += "&max={}".format(get_int(maxx))
+    
     if params.get('min') and get_int(params.get('min')):
-        minn = int(str(time.mktime(
-          datetime.datetime.strptime(params['min'], "%d/%m/%Y").timetuple())).split('.')[0])
-        url += "&min={}".format(get_int(minn))
+        url += "&min={}".format(get_int(params.get('min')))
 
     if params.get('max') and get_int(params.get('max')):
-        maxx = int(str(time.mktime(
-          datetime.datetime.strptime(params['max'], "%d/%m/%Y").timetuple())).split('.')[0])
-        url += "&max={}".format(get_int(maxx))
+        url += "&max={}".format(get_int(params.get('max')))
     
     if params.get('todate') and get_int(params.get('todate')):
         todate = int(str(time.mktime(
