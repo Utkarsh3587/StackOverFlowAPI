@@ -18,7 +18,7 @@ python manage.py runserver
 ## API
 
 ```
-URL: localhost:8000/questions
+URL: localhost:8000/questions/
 Method: POST
 Headers
 Content-Type: application/json
