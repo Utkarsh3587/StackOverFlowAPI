@@ -3,7 +3,7 @@
 
 This is example code for integrating Stack overFlow api with Django and Django rest framework using cache and throtling.
 
-#How to run this app:
+## How to run this app:
 
 clone this repository
 `
@@ -27,7 +27,8 @@ python manage.py migrate
 python manage.py runserver
 `
 
-#API
+## API
+
 ```
 URL: localhost:8000/questions
 Method: POST
