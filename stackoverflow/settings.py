@@ -132,8 +132,8 @@ REST_FRAMEWORK = {
     ),
     'EXCEPTION_HANDLER': 'rest_framework.views.exception_handler',
     'DEFAULT_THROTTLE_RATES': {
-        'max_per_min': '50/minute',
-        'max_per_day': '1000/day',
+        'max_per_min': '5/minute',
+        'max_per_day': '100/day',
     }
 
 }
